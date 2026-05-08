@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width-device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="video-container" id="parallax-header" style="height: 50vh">
+        <video autoplay muted loop id="bg-video">
+          <source src="Photos&Videos/RatsTrailer.mov" />
+        </video>
+        <nav class="navbar">
+          <ul>
+            <li><a href="Music.html" class="menu-link"> MUSIC </a></li>
+            <li><a href="Modeling.html" class="menu-link"> MODELING </a></li>
+            <li><a href="Film.html" class="menu-link"> FILM </a></li>
+            <li><a href="index.html" class="menu-link"> ABOUT </a></li>
+          </ul>
+        </nav>
+        <div class="text-overlay">
+          <h1><strong> LANDON ANDROGYN </strong></h1>
+        </div>
+      </div>
+    </header>
+
+    <script>
+      // Parallax effect for video header
+      const bgVideo = document.getElementById("bg-video");
+
+      window.addEventListener("scroll", () => {
+        const scrolled = window.pageYOffset;
+        const parallaxAmount = scrolled * 0.5;
+        bgVideo.style.transform = `translateY(${parallaxAmount}px)`;
+      });
+
+      // Menu scroll functionality
+      document.querySelectorAll(".menu-link").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          const href = link.getAttribute("href");
+          const currentPage =
+            window.location.pathname.split("/").pop() || "index.html";
+
+          // If it's the same page, scroll to content
+          if (
+            href === currentPage ||
+            (href === "index.html" && currentPage === "")
+          ) {
+            e.preventDefault();
+            const contentSection = document.querySelector("#gallery");
+            if (contentSection) {
+              contentSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+    </script>
+
+    <div class="gallery" id="gallery">
+      <div class="gallery-item">
+        <a
+          href="Photos&Videos/IMG_5895.JPG"
+          class="gallery-link"
+          data-title="BodiesOnCanvas1"
+        >
+          <img src="Photos&Videos/IMG_5895.JPG" alt="BodiesOnCanvas1" />
+        </a>
+      </div>
+
+      <div class="gallery-item video-item">
+        <iframe
+          src="https://www.youtube.com/embed/UerWfKgYUO4?si=xA-gzF9CVRUXn_C3autoplay=1&mute=1"
+        >
+        </iframe>
+      </div>
+
+      <div class="gallery-item">
+        <a
+          href="Photos&Videos/Ontheground.JPG"
+          class="gallery-link"
+          data-title="oilspill1"
+        >
+          <img src="Photos&Videos/Ontheground.JPG" alt="oilspill1" />
+        </a>
+      </div>
+
+      <div class="gallery-item">
+        <a
+          href="Photos&Videos/wet.JPG"
+          class="gallery-link"
+          data-title="oilspill2"
+        >
+          <img src="Photos&Videos/wet.JPG" alt="oilspill2" />
+        </a>
+      </div>
+
+      <div class="gallery-item">
+        <a
+          href="Photos&Videos/legup.JPG"
+          class="gallery-link"
+          data-title="oilspill3"
+        >
+          <img src="Photos&Videos/legup.JPG" alt="oilspill3" />
+        </a>
+      </div>
+
+      <div class="gallery-item">
+        <a
+          href="Photos&Videos/washedup.JPG"
+          class="gallery-link"
+          data-title="oilspill4"
+        >
+          <img src="Photos&Videos/washedup.JPG" alt="oilspill4" />
+        </a>
+      </div>
+
+      <div class="gallery-item">
+        <a
+          href="Photos&Videos/ArtistPhoto.JPG"
+          class="gallery-link"
+          data-title="oilspill5"
+        >
+          <img src="Photos&Videos/ArtistPhoto.JPG" alt="oilspill5" />
+        </a>
+      </div>
+
+      <div class="gallery-item">
+        <a
+          href="Photos&Videos/IMG_5495.JPG"
+          class="gallery-link"
+          data-title="oilspill6"
+        >
+          <img src="Photos&Videos/IMG_5495.JPG" alt="oilspill6" />
+        </a>
+      </div>
+
+      <div class="gallery-item">
+        <a
+          href="Photos&Videos/IMG_5507.JPG"
+          class="gallery-link"
+          data-title="oilspill7"
+        >
+          <img src="Photos&Videos/IMG_5507.JPG" alt="oilspill7" />
+        </a>
+      </div>
+
+      <div class="gallery-item">
+        <a
+          href="Photos&Videos/eating.JPG"
+          class="gallery-link"
+          data-title="eating"
+        >
+          <img src="Photos&Videos/eating.JPG" alt="eating" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+      <div class="lightbox-content">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-image" id="lightbox-img" src="" alt="" />
+        <div class="lightbox-title" id="lightbox-title"></div>
+        <a class="lightbox-prev" onclick="changeLightboxImage(-1)">&#10094;</a>
+        <a class="lightbox-next" onclick="changeLightboxImage(1)">&#10095;</a>
+      </div>
+    </div>
+
+    <script>
+      let currentLightboxIndex = 0;
+      const lightboxLinks = document.querySelectorAll(".gallery-link");
+
+      // Open lightbox
+      lightboxLinks.forEach((link, index) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          currentLightboxIndex = index;
+          openLightbox(index);
+        });
+      });
+
+      function openLightbox(index) {
+        const link = lightboxLinks[index];
+        const lightbox = document.getElementById("lightbox");
+        const img = document.getElementById("lightbox-img");
+        const title = document.getElementById("lightbox-title");
+
+        img.src = link.href;
+        title.textContent = link.dataset.title;
+        lightbox.style.display = "flex";
+      }
+
+      function changeLightboxImage(n) {
+        currentLightboxIndex += n;
+        if (currentLightboxIndex >= lightboxLinks.length) {
+          currentLightboxIndex = 0;
+        }
+        if (currentLightboxIndex < 0) {
+          currentLightboxIndex = lightboxLinks.length - 1;
+        }
+        openLightbox(currentLightboxIndex);
+      }
+
+      // Close lightbox
+      document
+        .querySelector(".lightbox-close")
+        .addEventListener("click", () => {
+          document.getElementById("lightbox").style.display = "none";
+        });
+
+      // Close on background click
+      document.getElementById("lightbox").addEventListener("click", (e) => {
+        if (e.target.id === "lightbox") {
+          document.getElementById("lightbox").style.display = "none";
+        }
+      });
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (document.getElementById("lightbox").style.display === "flex") {
+          if (e.key === "ArrowLeft") changeLightboxImage(-1);
+          if (e.key === "ArrowRight") changeLightboxImage(1);
+          if (e.key === "Escape")
+            document.getElementById("lightbox").style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>

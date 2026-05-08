@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width-device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <header>
+    <div class="video-container" id="parallax-header">
+      <video autoplay muted loop id="bg-video">
+        <source src="Photos&Videos/RatsTrailer.mov" />
+      </video>
+      <nav class="navbar">
+        <ul>
+          <li><a href="Music.html" class="menu-link"> MUSIC </a></li>
+          <li><a href="Modeling.html" class="menu-link"> MODELING </a></li>
+          <li><a href="Film.html" class="menu-link"> FILM </a></li>
+          <li><a href="index.html" class="menu-link"> ABOUT </a></li>
+        </ul>
+      </nav>
+      <div class="text-overlay">
+        <h1><strong> LANDON ANDROGYN </strong></h1>
+        <button class="scroll-button" id="scrollBtn">↓ Learn More ↓</button>
+      </div>
+    </div>
+  </header>
+
+  <script>
+    // Parallax effect for video header
+    const parallaxHeader = document.getElementById("parallax-header");
+    const bgVideo = document.getElementById("bg-video");
+    const scrollBtn = document.getElementById("scrollBtn");
+
+    window.addEventListener("scroll", () => {
+      const scrolled = window.pageYOffset;
+      const parallaxAmount = scrolled * 0.5; // 0.5 creates the parallax effect (slower movement)
+      bgVideo.style.transform = `translateY(${parallaxAmount}px)`;
+    });
+
+    // Scroll button functionality
+    scrollBtn.addEventListener("click", () => {
+      const contentSection = document.querySelector(".about-section");
+      if (contentSection) {
+        contentSection.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+
+    // Menu scroll functionality
+    document.querySelectorAll(".menu-link").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+        const currentPage =
+          window.location.pathname.split("/").pop() || "index.html";
+
+        // If it's the same page, scroll to content
+        if (
+          href === currentPage ||
+          (href === "index.html" && currentPage === "")
+        ) {
+          e.preventDefault();
+          const contentSection = document.querySelector(".about-section");
+          if (contentSection) {
+            contentSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+      });
+    });
+  </script>
+  <body>
+    <h2>ABOUT</h2>
+    <div class="about-section">
+      <img
+        src="Photos&Videos/ArtistPhoto.JPG"
+        class="artist-image"
+        alt="Landon Androgyn"
+      />
+      <h4>
+        Born in Portland, Oregon, Landon Androgyn is a multimedia artist that
+        emphasizes movement above all else.
+      </h4>
+      <p>
+        In their music, Androgyn creates electronic soundworlds of inhuman
+        textures and complex harmony with constant shifts in aesthetics. With a
+        heavy influence in dance music, she understands her music as dance
+        music, regardless of tone or format. Synthesizing sounds from scratch
+        and distorting samples beyond recognition, she indulges in a
+        hyper-composer workflow with technical attention to each element.
+      </p>
+    </div>
+  </body>
+</html>

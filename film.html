@@ -1,0 +1,68 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Film - Landon Androgyn</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="video-container" id="parallax-header" style="height: 50vh">
+        <video autoplay muted loop id="bg-video">
+          <source src="Photos&Videos/RatsTrailer.mov" />
+        </video>
+        <nav class="navbar">
+          <ul>
+            <li><a href="Music.html" class="menu-link"> MUSIC </a></li>
+            <li><a href="Modeling.html" class="menu-link"> MODELING </a></li>
+            <li><a href="film.html" class="menu-link"> FILM </a></li>
+            <li><a href="index.html" class="menu-link"> ABOUT </a></li>
+          </ul>
+        </nav>
+        <div class="text-overlay">
+          <h1><strong> LANDON ANDROGYN </strong></h1>
+        </div>
+      </div>
+    </header>
+
+    <script>
+      // Parallax effect for video header
+      const bgVideo = document.getElementById("bg-video");
+
+      window.addEventListener("scroll", () => {
+        const scrolled = window.pageYOffset;
+        const parallaxAmount = scrolled * 0.5;
+        bgVideo.style.transform = `translateY(${parallaxAmount}px)`;
+      });
+
+      // Menu scroll functionality
+      document.querySelectorAll(".menu-link").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          const href = link.getAttribute("href");
+          const currentPage =
+            window.location.pathname.split("/").pop() || "index.html";
+
+          // If it's the same page, scroll to content
+          if (
+            href === currentPage ||
+            (href === "index.html" && currentPage === "")
+          ) {
+            e.preventDefault();
+            const contentSection = document.querySelector("#film-content");
+            if (contentSection) {
+              contentSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+    </script>
+
+    <section id="film-content">
+      <h1>FILM PAGE</h1>
+    </section>
+  </body>
+</html>

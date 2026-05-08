@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css"
+    href="style.css">
+</head>
+<header>
+    <div class="video-container" id="parallax-header" style="height: 50vh;">
+    <video autoplay muted loop id="bg-video">
+        <source src="Photos&Videos/RatsTrailer.mov">
+    </video>
+    <nav class="navbar"> 
+        <ul>
+            <li> <a href="Music.html" class="menu-link"> MUSIC </a>
+            <li> <a href="Modeling.html" class="menu-link"> MODELING </a>
+            <li> <a href="Film.html" class="menu-link"> FILM </a>
+            <li> <a href="index.html" class="menu-link"> ABOUT </a>
+            </ul>
+    </nav>
+    <div class="text-overlay">
+        <h1> <strong> LANDON ANDROGYN </strong></h1> 
+    </div>
+    </div>
+</header>
+
+<script>
+    // Parallax effect for video header
+    const bgVideo = document.getElementById('bg-video');
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxAmount = scrolled * 0.5;
+        bgVideo.style.transform = `translateY(${parallaxAmount}px)`;
+    });
+
+    // Menu scroll functionality
+    document.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            
+            // If it's the same page, scroll to content
+            if (href === currentPage || (href === 'index.html' && currentPage === '')) {
+                e.preventDefault();
+                const contentSection = document.querySelector('body > h2, body > .music-content, body > .about-section');
+                if (contentSection) {
+                    contentSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+</script>
+
+<body>
+    <section class="music-content">
+    <h2> MUSIC </h2>
+<img class="xtrocene"
+src="Photos&Videos/XTROCENE.png">
+<h4> ‘XTROCENE’ is new worlds. <br> <hr> 
+</h2>
+
+<h2> A hyper-real representation of universes beyond our cosmic microwave background. Abstractly intertwined with the human and yet completely isolated from it. <br> 
+</h2> 
+
+<h2> This album/video work extends frequency up to the highest and lowest points possible. Each track in the album essentially represents a different exoplanet, culture, and way of existing that may or may not include life at all. The visuals will be embedded into the music, exploring these worlds through distorted geometry, strobes, aliens, humans that aren’t humans, and STROBE. Light, the absence of light, a world, a tiny instance, XTROverse is all of it.
+<style>
+    h2 {
+        letter-spacing: 1px;
+        flex-wrap: wrap;
+        font-size: 20px;
+    }
+    h4 { 
+        font-size: 35px;
+    }
+</style>    </section>
+</body>
+</html>
